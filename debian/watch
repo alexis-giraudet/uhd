@@ -1,0 +1,4 @@
+version=4
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%uhd-$1.tar.gz%" \
+https://github.com/EttusResearch/uhd/releases \
+(?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian uupdate

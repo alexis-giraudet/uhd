@@ -1,0 +1,65 @@
+From 52878b8cb10cf1f8fd9f29d3bf28250871dd7158 Mon Sep 17 00:00:00 2001
+From: "A. Maitland Bottoms" <bottoms@debian.org>
+Date: Fri, 26 Oct 2018 21:25:56 -0400
+Subject: [PATCH 4/6] debian boost python
+
+The boost python3 component is python-py36 in Debian.
+---
+ host/CMakeLists.txt        | 6 +++---
+ host/python/CMakeLists.txt | 3 ++-
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+--- a/host/CMakeLists.txt
++++ b/host/CMakeLists.txt
+@@ -284,11 +284,16 @@
+ # Choose a version of Python
+ ########################################################################
+ option(ENABLE_PYTHON3 "Enable Python 3. Default is Python 2" OFF)
+-set(BOOST_PYTHON_COMPONENT python)
+-set(BOOST_PYTHON_VERSION 2.7)
+ if(${ENABLE_PYTHON3})
++  if(NOT BOOST_PYTHON_COMPONENT)
+     set(BOOST_PYTHON_COMPONENT python3)
++  endif()
+     set(BOOST_PYTHON_VERSION 3)
++else()
++  if(NOT BOOST_PYTHON_COMPONENT)
++    set(BOOST_PYTHON_COMPONENT python)
++  endif()
++    set(BOOST_PYTHON_VERSION 2.7)
+ endif()
+ 
+ ########################################################################
+@@ -347,8 +352,22 @@
+ set(BOOST_PYTHON_FOUND ${Boost_PYTHON_FOUND})
+ set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON_LIBRARY})
+ if(${ENABLE_PYTHON3})
++  if(${Boost_PYTHON3_FOUND})
+     set(BOOST_PYTHON_FOUND ${Boost_PYTHON3_FOUND})
+     set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON3_LIBRARY})
++  endif()
++  if(${Boost_PYTHON35_FOUND})
++    set(BOOST_PYTHON_FOUND ${Boost_PYTHON35_FOUND})
++    set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON35_LIBRARY})
++  endif()
++  if(${Boost_PYTHON36_FOUND})
++    set(BOOST_PYTHON_FOUND ${Boost_PYTHON36_FOUND})
++    set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON36_LIBRARY})
++  endif()
++  if(${Boost_PYTHON37_FOUND})
++    set(BOOST_PYTHON_FOUND ${Boost_PYTHON37_FOUND})
++    set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON37_LIBRARY})
++  endif()
+ endif()
+ 
+ message(STATUS "Boost include directories: ${Boost_INCLUDE_DIRS}")
+--- a/host/python/CMakeLists.txt
++++ b/host/python/CMakeLists.txt
+@@ -23,6 +23,7 @@
+ 
+ # Build pyuhd library
+ add_library(pyuhd SHARED pyuhd.cpp)
++set_target_properties(pyuhd PROPERTIES SKIP_BUILD_RPATH TRUE)
+ target_include_directories(pyuhd PUBLIC
+     ${PYTHON_NUMPY_INCLUDE_DIR}
+     ${CMAKE_SOURCE_DIR}/lib

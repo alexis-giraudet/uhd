@@ -1,0 +1,102 @@
+Source: uhd
+Section: science
+Priority: optional
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Build-Depends: cmake,
+               debhelper (>= 10),
+	       dh-python,
+	       doxygen,
+	       doxygen-latex,
+	       graphviz [!powerpcspe],
+               libboost-date-time-dev,
+	       libboost-dev,
+               libboost-filesystem-dev,
+               libboost-program-options-dev,
+	       libboost-python-dev,
+               libboost-regex-dev,
+               libboost-serialization-dev,
+               libboost-system-dev,
+               libboost-test-dev,
+               libboost-thread-dev,
+               libgps-dev,
+               libncurses5-dev,
+               liborc-0.4-dev,
+	       libudev-dev [linux-any],
+               libusb-1.0-0-dev [linux-any],
+               libusb2-dev [kfreebsd-any],
+	       ninja-build,
+	       python3-all-dev,
+               python3-mako,
+	       python3-numpy,
+	       python3-requests,
+	       python3-setuptools
+Standards-Version: 4.1.4
+Homepage: http://www.ettus.com/sdr-software/detail/usrp-hardware-driver
+Vcs-Browser: http://salsa.debian.org/bottoms/pkg-uhd
+Vcs-Git: git://salsa.debian.org/bottoms/pkg-uhd.git
+
+Package: uhd-host
+Architecture: any
+Depends: adduser,
+         libuhd3.13.1 (= ${binary:Version}),
+         ${python3:Depends},
+         python3-requests,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: curl, procps
+Suggests: gnuradio, fdisk | util-linux (<< 2.29.2-3~)
+Description: universal hardware driver for Ettus Research products - host apps
+ Host utilities for the Universal Hardware Driver for Ettus Research products.
+ .
+ The supported devices provide analog radio receiver and transmitter hardware
+ along with digital interfaces for getting signals to and from a software
+ defined radio running on the host computer.
+ .
+ This package includes the uhd_find_devices application to locate and
+ configure attached peripherals, the uhd_usrp_probe application to
+ display hardware configuration information and Doxygen generated
+ documentation.
+
+Package: libuhd3.13.1
+Architecture: any
+Section: libs
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Suggests: gnuradio
+Multi-Arch: same
+Description: universal hardware driver for Ettus Research products - library
+ Host library for the Universal Hardware Driver for Ettus Research products.
+ .
+ The supported devices provide analog radio receiver and transmitter hardware
+ along with digital interfaces for getting signals to and from a software
+ defined radio running on the host computer.
+
+Package: libuhd-dev
+Architecture: any
+Section: libdevel
+Depends: libuhd3.13.1 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Recommends: gnuradio
+Multi-Arch: same
+Description: universal hardware driver for Ettus Research products - headers
+ Host library for the Universal Hardware Driver for Ettus Research products.
+ .
+ The supported devices provide analog radio receiver and transmitter hardware
+ along with digital interfaces for getting signals to and from a software
+ defined radio running on the host computer.
+ .
+ This package contains the header files for developing with libuhd.
+ Doxygen generated documentation is in the uhd-host package.
+
+Package: python3-uhd
+Architecture: any
+Section: libdevel
+Depends: libuhd3.13.1 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
+Recommends: gnuradio
+Description: universal hardware driver for Ettus Research products - Python3
+ Host library for the Universal Hardware Driver for Ettus Research products.
+ .
+ The supported devices provide analog radio receiver and transmitter hardware
+ along with digital interfaces for getting signals to and from a software
+ defined radio running on the host computer.
+ .
+ This package contains the Python API support for Python3.

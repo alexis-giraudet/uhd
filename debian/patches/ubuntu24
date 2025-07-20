@@ -1,0 +1,307 @@
+Description: Ubuntu 24
+ Patch Boost, Python and GCC to build on Ubuntu 24.
+ .
+ uhd (3.13.1.0-4) UNRELEASED; urgency=medium
+ .
+  * Patch for Boost 1.83
+  * Patch for Python 3.12
+  * Patch for GCC 13.3.0
+Author: Alexis Giraudet <alexis.giraudet@nav-timing.safrangroup.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout https://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: (upstream|backport|vendor|other), (<patch-url>|commit:<commit-id>)
+Bug: <upstream-bugtracker-url>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: (no|not-needed|<patch-forwarded-url>)
+Applied-Upstream: <version>, (<commit-url>|commit:<commid-id>)
+Reviewed-By: <name and email of someone who approved/reviewed the patch>
+Last-Update: 2025-07-20
+
+--- uhd-3.13.1.0.orig/host/CMakeLists.txt
++++ uhd-3.13.1.0/host/CMakeLists.txt
+@@ -238,6 +238,7 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL "GN
+     add_definitions(-Wall)
+     add_definitions(-Wextra)
+     add_definitions(-Wsign-compare)
++    add_definitions(-Wno-error=format-security)
+     #add_definitions(-Wconversion)
+     #add_definitions(-pedantic)
+     #add_definitions(-ansi)
+@@ -368,8 +369,18 @@ if(${ENABLE_PYTHON3})
+     set(BOOST_PYTHON_FOUND ${Boost_PYTHON37_FOUND})
+     set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON37_LIBRARY})
+   endif()
++  if(${Boost_PYTHON310_FOUND})
++    set(BOOST_PYTHON_FOUND ${Boost_PYTHON310_FOUND})
++    set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON310_LIBRARY})
++  endif()
++  if(${Boost_PYTHON312_FOUND})
++    set(BOOST_PYTHON_FOUND ${Boost_PYTHON312_FOUND})
++    set(BOOST_PYTHON_LIBRARY ${Boost_PYTHON312_LIBRARY})
++  endif()
+ endif()
+ 
++add_compile_definitions(BOOST_TIMER_ENABLE_DEPRECATED)
++
+ message(STATUS "Boost include directories: ${Boost_INCLUDE_DIRS}")
+ message(STATUS "Boost library directories: ${Boost_LIBRARY_DIRS}")
+ message(STATUS "Boost libraries: ${Boost_LIBRARIES}")
+--- uhd-3.13.1.0.orig/host/include/uhd/utils/byteswap.ipp
++++ uhd-3.13.1.0/host/include/uhd/utils/byteswap.ipp
+@@ -89,7 +89,7 @@
+ /***********************************************************************
+  * Define the templated network to/from host conversions
+  **********************************************************************/
+-#include <boost/detail/endian.hpp>
++#include <boost/endian.hpp>
+ 
+ namespace uhd {
+ 
+--- uhd-3.13.1.0.orig/host/lib/include/uhdlib/experts/expert_nodes.hpp
++++ uhd-3.13.1.0/host/lib/include/uhdlib/experts/expert_nodes.hpp
+@@ -16,6 +16,7 @@
+ #include <boost/thread/recursive_mutex.hpp>
+ #include <boost/thread.hpp>
+ #include <boost/units/detail/utility.hpp>
++#include <boost/core/noncopyable.hpp>
+ #include <memory>
+ #include <list>
+ #include <stdint.h>
+--- uhd-3.13.1.0.orig/host/lib/rfnoc/dma_fifo_block_ctrl_impl.cpp
++++ uhd-3.13.1.0/host/lib/rfnoc/dma_fifo_block_ctrl_impl.cpp
+@@ -14,6 +14,7 @@
+ #include <boost/make_shared.hpp>
+ #include <boost/thread/mutex.hpp>
+ #include <boost/format.hpp>
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::rfnoc;
+--- uhd-3.13.1.0.orig/host/lib/transport/gen_vrt_if_packet.py
++++ uhd-3.13.1.0/host/lib/transport/gen_vrt_if_packet.py
+@@ -23,7 +23,7 @@ TMPL_TEXT = """<% import time %>
+ #include <uhd/exception.hpp>
+ #include <uhd/transport/vrt_if_packet.hpp>
+ #include <uhd/utils/byteswap.hpp>
+-#include <boost/detail/endian.hpp>
++#include <boost/endian.hpp>
+ #include <vector>
+ 
+ //define the endian macros to convert integers
+--- uhd-3.13.1.0.orig/host/lib/usrp/b100/b100_impl.cpp
++++ uhd-3.13.1.0/host/lib/usrp/b100/b100_impl.cpp
+@@ -16,6 +16,7 @@
+ #include <uhd/utils/safe_call.hpp>
+ #include <uhdlib/usrp/common/apply_corrections.hpp>
+ #include <boost/format.hpp>
++#include <boost/bind.hpp>
+ #include <cstdio>
+ #include <iostream>
+ #include <chrono>
+--- uhd-3.13.1.0.orig/host/lib/usrp/common/lmx2592.cpp
++++ uhd-3.13.1.0/host/lib/usrp/common/lmx2592.cpp
+@@ -12,6 +12,7 @@
+ #include <cmath>
+ #include <iomanip>
+ #include <iostream>
++#include <array>
+ 
+ using namespace uhd;
+ 
+--- uhd-3.13.1.0.orig/host/lib/usrp/cores/rx_dsp_core_3000.cpp
++++ uhd-3.13.1.0/host/lib/usrp/cores/rx_dsp_core_3000.cpp
+@@ -15,6 +15,7 @@
+ #include <boost/assign/list_of.hpp>
+ #include <boost/thread/thread.hpp> //thread sleep
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <algorithm>
+ #include <cmath>
+ 
+--- uhd-3.13.1.0.orig/host/lib/usrp/cores/tx_dsp_core_3000.cpp
++++ uhd-3.13.1.0/host/lib/usrp/cores/tx_dsp_core_3000.cpp
+@@ -14,6 +14,7 @@
+ #include <boost/assign/list_of.hpp>
+ #include <boost/math/special_functions/round.hpp>
+ #include <boost/thread/thread.hpp> //sleep
++#include <boost/bind.hpp>
+ #include <algorithm>
+ #include <cmath>
+ 
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_cbx.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_cbx.cpp
+@@ -8,6 +8,7 @@
+ #include "db_sbx_common.hpp"
+ #include <boost/algorithm/string.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_dbsrx.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_dbsrx.cpp
+@@ -23,6 +23,7 @@
+ #include <boost/assign/list_of.hpp>
+ #include <boost/format.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <utility>
+ #include <cmath>
+ #include <chrono>
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_dbsrx2.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_dbsrx2.cpp
+@@ -21,6 +21,7 @@
+ #include <boost/format.hpp>
+ #include <boost/thread.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <utility>
+ 
+ using namespace uhd;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_sbx_common.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_sbx_common.cpp
+@@ -6,6 +6,7 @@
+ //
+ 
+ #include "db_sbx_common.hpp"
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_sbx_version3.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_sbx_version3.cpp
+@@ -9,6 +9,7 @@
+ #include "db_sbx_common.hpp"
+ #include <uhd/types/tune_request.hpp>
+ #include <boost/algorithm/string.hpp>
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_sbx_version4.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_sbx_version4.cpp
+@@ -9,6 +9,7 @@
+ #include "db_sbx_common.hpp"
+ #include <uhd/types/tune_request.hpp>
+ #include <boost/algorithm/string.hpp>
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_tvrx.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_tvrx.cpp
+@@ -32,6 +32,7 @@
+ #include <boost/thread.hpp>
+ #include <boost/array.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <utility>
+ #include <cmath>
+ #include <cfloat>
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_tvrx2.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_tvrx2.cpp
+@@ -55,6 +55,7 @@
+ #include <boost/format.hpp>
+ #include <boost/array.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <utility>
+ #include <cmath>
+ #include <chrono>
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_ubx.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_ubx.cpp
+@@ -24,6 +24,7 @@
+ #include <boost/math/special_functions/round.hpp>
+ #include <boost/algorithm/string.hpp>
+ #include <boost/thread/mutex.hpp>
++#include <boost/bind.hpp>
+ #include <map>
+ #include <chrono>
+ #include <thread>
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/db_xcvr2450.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/db_xcvr2450.cpp
+@@ -51,6 +51,7 @@
+ #include <boost/assign/list_of.hpp>
+ #include <boost/format.hpp>
+ #include <boost/math/special_functions/round.hpp>
++#include <boost/bind.hpp>
+ #include <utility>
+ #include <chrono>
+ #include <thread>
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/magnesium/magnesium_radio_ctrl_cpld.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/magnesium/magnesium_radio_ctrl_cpld.cpp
+@@ -8,6 +8,7 @@
+ #include "magnesium_cpld_ctrl.hpp"
+ #include "magnesium_constants.hpp"
+ #include <uhd/utils/log.hpp>
++#include <thread>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/neon/neon_radio_ctrl_impl.cpp
++++ uhd-3.13.1.0/host/lib/usrp/dboard/neon/neon_radio_ctrl_impl.cpp
+@@ -21,6 +21,7 @@
+ #include <sstream>
+ #include <cmath>
+ #include <cstdlib>
++#include <thread>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/multi_usrp.cpp
++++ uhd-3.13.1.0/host/lib/usrp/multi_usrp.cpp
+@@ -28,6 +28,7 @@
+ #include <bitset>
+ #include <chrono>
+ #include <thread>
++#include <boost/bind.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+--- uhd-3.13.1.0.orig/host/lib/usrp/usrp2/usrp2_impl.cpp
++++ uhd-3.13.1.0/host/lib/usrp/usrp2/usrp2_impl.cpp
+@@ -21,7 +21,8 @@
+ #include <boost/bind.hpp>
+ #include <boost/asio/ip/address_v4.hpp>
+ #include <boost/asio.hpp> //used for htonl and ntohl
+-#include <boost/thread.hpp>
++#include <boost/math/special_functions/round.hpp>
++#include <boost/math/special_functions/sign.hpp>
+ 
+ using namespace uhd;
+ using namespace uhd::usrp;
+@@ -878,9 +879,6 @@ meta_range_t usrp2_impl::get_tx_dsp_freq
+     );
+ }
+ 
+-#include <boost/math/special_functions/round.hpp>
+-#include <boost/math/special_functions/sign.hpp>
+-
+ void usrp2_impl::update_clock_source(const std::string &mb, const std::string &source){
+     //NOTICE: U2_REG_MISC_CTRL_CLOCK is on the wb clock, and cannot be set from fifo_ctrl
+     //clock source ref 10mhz
+--- uhd-3.13.1.0.orig/host/lib/usrp/x300/x300_radio_ctrl_impl.cpp
++++ uhd-3.13.1.0/host/lib/usrp/x300/x300_radio_ctrl_impl.cpp
+@@ -19,6 +19,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/make_shared.hpp>
+ #include <boost/date_time/posix_time/posix_time_io.hpp>
++#include <boost/bind.hpp>
+ #include <chrono>
+ #include <thread>
+ 
+--- uhd-3.13.1.0.orig/host/lib/usrp_clock/octoclock/octoclock_impl.cpp
++++ uhd-3.13.1.0/host/lib/usrp_clock/octoclock/octoclock_impl.cpp
+@@ -13,6 +13,7 @@
+ #include <boost/filesystem.hpp>
+ #include <boost/format.hpp>
+ #include <boost/thread.hpp>
++#include <boost/bind.hpp>
+ 
+ #include <uhd/device.hpp>
+ #include <uhd/exception.hpp>

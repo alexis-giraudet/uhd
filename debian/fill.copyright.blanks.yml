@@ -1,0 +1,26 @@
+fpga-src/usrp2/opencores/aemb/doc/:
+ skip: '1'
+
+fpga-src/usrp2/opencores/i2c/doc/:
+ skip: '1'
+
+fpga-src/usrp2/opencores/spi/doc/:
+ skip: '1'
+
+fpga-src/usrp3/lib/coregen/simple_fft/cmodel/:
+ skip: '1'
+
+fpga-src/usrp3/lib/coregen/simple_fir/cmodel/:
+ skip: '1'
+
+fpga-src/usrp3/lib/wb_spi/doc/:
+ skip: '1'
+
+fpga-src/usrp3/lib/xge/doc/:
+ skip: '1'
+
+host/cmake/msvc/erllc_uhd.cat:
+ skip: '1'
+
+host/docs/res/:
+ skip: '1'

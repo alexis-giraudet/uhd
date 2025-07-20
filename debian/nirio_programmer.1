@@ -1,0 +1,58 @@
+.TH UHD; "1" "February 2014" "UHD 3.7.0" "User Commands"
+.SH NAME
+nirio_programmer \- National Instruments reconfigurable I/O tool
+.SH DESCRIPTION
+USRP\-NIRIO\-Programmer
+.IP
+Allowed options:
+.TP
+\fB\-\-help\fR
+help message
+.TP
+\fB\-\-interface\fR arg (=0)
+The interface number to communicate with.
+.TP
+\fB\-\-port\fR arg (=5444)
+Port to communicate with RPC server.
+.TP
+\fB\-\-fpga\fR arg
+The absolute path to the LVBITX file to download to the
+FPGA.
+.TP
+\fB\-\-flash\fR arg
+The path to the image to download to the flash OR
+\&'erase' to erase the FPGA image from flash.
+.TP
+\fB\-\-peek\fR arg
+Peek32.
+.TP
+\fB\-\-poke\fR arg
+Poke32.
+.TP
+\fB\-\-stats\fR
+Dump interface and DMA stats.
+.SH "SEE ALSO"
+UHD documentation:
+.B http://files.ettus.com/uhd_docs/manual/doxygen/index.html
+.LP
+GR-UHD documentation:
+.B http://gnuradio.org/doc/doxygen/page_uhd.html
+.LP
+Other UHD programs:
+.sp
+uhd_cal_tx_dc_offset(1) uhd_cal_rx_iq_balance(1)
+.SH AUTHOR
+This manual page was written by Maitland Bottoms and Nicholas Corgan
+for the Debian project (but may be used by others).
+.SH COPYRIGHT
+Copyright (c) 2014 Ettus Research LLC
+.LP
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+.LP
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.

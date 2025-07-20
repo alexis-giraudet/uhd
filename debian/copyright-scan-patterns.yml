@@ -1,0 +1,10 @@
+ignore :
+  suffixes :
+   - jpg
+   - pdf
+   - png
+   - rbf
+   - sxw
+   - ncd
+   - xdl
+   - zip

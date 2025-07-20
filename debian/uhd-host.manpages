@@ -1,0 +1,13 @@
+host/docs/uhd_cal_rx_iq_balance.1
+host/docs/uhd_cal_tx_dc_offset.1
+host/docs/uhd_cal_tx_iq_balance.1
+host/docs/uhd_config_info.1
+host/docs/uhd_find_devices.1
+host/docs/uhd_image_loader.1
+host/docs/uhd_images_downloader.1
+host/docs/uhd_usrp_probe.1
+host/docs/usrp2_card_burner.1
+host/docs/usrp_n2xx_simple_net_burner.1
+host/docs/usrp_x3xx_fpga_burner.1
+debian/nirio_programmer.1
+host/docs/octoclock_firmware_burner.1

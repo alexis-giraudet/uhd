@@ -1,0 +1,49 @@
+From 148172907961aaadf7e6d72ff113fd197f4eac0d Mon Sep 17 00:00:00 2001
+From: "A. Maitland Bottoms" <bottoms@debian.org>
+Date: Thu, 8 Nov 2018 12:08:32 -0500
+Subject: [PATCH 4/4] rfnoc blocks track runtime abi
+
+each installed version of libuhd finds its own runtime support
+---
+ host/include/uhd/rfnoc/blocks/CMakeLists.txt | 8 +++++++-
+ host/include/uhd/rfnoc/constants.hpp         | 3 ++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+--- a/host/include/uhd/rfnoc/blocks/CMakeLists.txt
++++ b/host/include/uhd/rfnoc/blocks/CMakeLists.txt
+@@ -7,9 +7,15 @@
+ 
+ file(GLOB xml_files "*.xml")
+ 
++# rfnoc blocks track runtime abi
++# each installed version of libuhd finds its own runtime support
++# must match UHD_VERSION_ABI_STRING definition in version.hpp
++set(UHD_BLOCKS_ABI
++  ${UHD_VERSION_MAJOR}.${UHD_VERSION_API}.${UHD_VERSION_ABI})
++
+ # We always need this, even when RFNoC is 'disabled'
+ UHD_INSTALL(
+     FILES ${xml_files}
+-    DESTINATION ${PKG_DATA_DIR}/rfnoc/blocks
++    DESTINATION ${PKG_DATA_DIR}/${UHD_BLOCKS_ABI}/rfnoc/blocks
+     COMPONENT headers # TODO: Different component
+ )
+--- a/host/include/uhd/rfnoc/constants.hpp
++++ b/host/include/uhd/rfnoc/constants.hpp
+@@ -8,6 +8,7 @@
+ #ifndef INCLUDED_LIBUHD_RFNOC_CONSTANTS_HPP
+ #define INCLUDED_LIBUHD_RFNOC_CONSTANTS_HPP
+ 
++#include <uhd/version.hpp>
+ #include <uhd/types/dict.hpp>
+ #include <boost/assign/list_of.hpp>
+ #include <stdint.h>
+@@ -18,7 +19,7 @@
+ 
+ // All these configure the XML reader
+ //! Where the RFNoC block/component definition files lie, relative to UHD_PKG_DIR
+-static const std::string XML_DEFAULT_PATH = "share/uhd/rfnoc";
++      static const std::string XML_DEFAULT_PATH = std::string("share/uhd/")+std::string(UHD_VERSION_ABI_STRING)+std::string("/rfnoc");
+ //! The name of the environment variable storing the bath to the block definition files
+ static const std::string XML_PATH_ENV = "UHD_RFNOC_DIR";
+ 
