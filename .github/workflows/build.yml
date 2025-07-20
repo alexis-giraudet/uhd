@@ -1,0 +1,26 @@
+name: Build Debian Package
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build package
+        run: |
+          sudo apt -y update
+          sudo apt -y install devscripts equivs
+          sudo mk-build-deps --install debian/control --tool "apt -y" --remove
+          tar -xf uhd_*.orig.tar.xz
+          tar -xf uhd_*.orig-fpga-src.tar.xz -C uhd-*/
+          mv debian/ uhd-*/
+          cd uhd-*/
+          debuild
+          mkdir "${{ runner.temp }}/artifact/"
+          cp ../*.deb "${{ runner.temp }}/artifact/"
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ${{ runner.temp }}/artifact/
