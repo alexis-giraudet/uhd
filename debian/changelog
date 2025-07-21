@@ -3,7 +3,6 @@ uhd (3.13.1.0-4) UNRELEASED; urgency=medium
   * Patch for Boost 1.83
   * Patch for Python 3.12
   * Patch for GCC 13.3.0
-  * Patch for Python 3
 
  -- Alexis Giraudet <alexis.giraudet@nav-timing.safrangroup.com>  Sun, 20 Jul 2025 23:05:58 +0200
 

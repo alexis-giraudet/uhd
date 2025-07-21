@@ -6,7 +6,6 @@ Description: Ubuntu 24
   * Patch for Boost 1.83
   * Patch for Python 3.12
   * Patch for GCC 13.3.0
-  * Patch for Python 3
 Author: Alexis Giraudet <alexis.giraudet@nav-timing.safrangroup.com>
 
 --- uhd-3.13.1.0.orig/host/CMakeLists.txt
