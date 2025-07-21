@@ -6,21 +6,8 @@ Description: Ubuntu 24
   * Patch for Boost 1.83
   * Patch for Python 3.12
   * Patch for GCC 13.3.0
+  * Patch for Python 3
 Author: Alexis Giraudet <alexis.giraudet@nav-timing.safrangroup.com>
-
----
-The information above should follow the Patch Tagging Guidelines, please
-checkout https://dep.debian.net/deps/dep3/ to learn about the format. Here
-are templates for supplementary fields that you might want to add:
-
-Origin: (upstream|backport|vendor|other), (<patch-url>|commit:<commit-id>)
-Bug: <upstream-bugtracker-url>
-Bug-Debian: https://bugs.debian.org/<bugnumber>
-Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
-Forwarded: (no|not-needed|<patch-forwarded-url>)
-Applied-Upstream: <version>, (<commit-url>|commit:<commid-id>)
-Reviewed-By: <name and email of someone who approved/reviewed the patch>
-Last-Update: 2025-07-20
 
 --- uhd-3.13.1.0.orig/host/CMakeLists.txt
 +++ uhd-3.13.1.0/host/CMakeLists.txt
@@ -305,3 +292,979 @@ Last-Update: 2025-07-20
  
  #include <uhd/device.hpp>
  #include <uhd/exception.hpp>
+--- uhd-3.13.1.0.orig/firmware/fx2/utils/build_eeprom.py
++++ uhd-3.13.1.0/firmware/fx2/utils/build_eeprom.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2004,2006 Free Software Foundation, Inc.
+ # 
+--- uhd-3.13.1.0.orig/firmware/fx2/utils/edit-gpif-b100.py
++++ uhd-3.13.1.0/firmware/fx2/utils/edit-gpif-b100.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- Python -*-
+ #
+ # Copyright 2003 Free Software Foundation, Inc.
+--- uhd-3.13.1.0.orig/firmware/fx2/utils/edit-gpif.py
++++ uhd-3.13.1.0/firmware/fx2/utils/edit-gpif.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- Python -*-
+ #
+ # Copyright 2003 Free Software Foundation, Inc.
+--- uhd-3.13.1.0.orig/firmware/fx2/utils/generate_regs.py
++++ uhd-3.13.1.0/firmware/fx2/utils/generate_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os, os.path
+ import re
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/bin_to_mif.py
++++ uhd-3.13.1.0/firmware/usrp2/bin/bin_to_mif.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import struct
+ import sys
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/bin_to_ram_macro_init.py
++++ uhd-3.13.1.0/firmware/usrp2/bin/bin_to_ram_macro_init.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import struct
+ import sys
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/divisors.py
++++ uhd-3.13.1.0/firmware/usrp2/bin/divisors.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ speeds = (9600, 19200, 38400, 57600, 115200, 230400)
+ 
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/elf_to_sbf
++++ uhd-3.13.1.0/firmware/usrp2/bin/elf_to_sbf
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2009 Free Software Foundation, Inc.
+ #
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/serial_loader
++++ uhd-3.13.1.0/firmware/usrp2/bin/serial_loader
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2009 Free Software Foundation, Inc.
+ #
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/uart_ihex_flash_loader.py
++++ uhd-3.13.1.0/firmware/usrp2/bin/uart_ihex_flash_loader.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import serial
+ from optparse import OptionParser
+--- uhd-3.13.1.0.orig/firmware/usrp2/bin/uart_ihex_ram_loader.py
++++ uhd-3.13.1.0/firmware/usrp2/bin/uart_ihex_ram_loader.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import serial
+ from optparse import OptionParser
+--- uhd-3.13.1.0.orig/firmware/usrp3/n230/n230_burner.py
++++ uhd-3.13.1.0/firmware/usrp3/n230/n230_burner.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2014 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/firmware/usrp3/n230/n230_debug.py
++++ uhd-3.13.1.0/firmware/usrp3/n230/n230_debug.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2011 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/firmware/usrp3/utils/bin_to_coe.py
++++ uhd-3.13.1.0/firmware/usrp3/utils/bin_to_coe.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import sys
+ import binascii
+--- uhd-3.13.1.0.orig/firmware/usrp3/x300/x300_aurora_bist.py
++++ uhd-3.13.1.0/firmware/usrp3/x300/x300_aurora_bist.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/firmware/usrp3/x300/x300_debug.py
++++ uhd-3.13.1.0/firmware/usrp3/x300/x300_debug.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2014 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp1/gen_makefile_extra.py
++++ uhd-3.13.1.0/fpga-src/usrp1/gen_makefile_extra.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2006 Free Software Foundation, Inc.
+ # 
+--- uhd-3.13.1.0.orig/fpga-src/usrp1/sdr_lib/gen_cordic_consts.py
++++ uhd-3.13.1.0/fpga-src/usrp1/sdr_lib/gen_cordic_consts.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import math
+ 
+--- uhd-3.13.1.0.orig/fpga-src/usrp1/toplevel/mrfm/mrfm.py
++++ uhd-3.13.1.0/fpga-src/usrp1/toplevel/mrfm/mrfm.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # This is mrfm_fft_sos.py
+ # Modification of Matt's mrfm_fft.py that reads filter coefs from file
+--- uhd-3.13.1.0.orig/fpga-src/usrp1/toplevel/mrfm/mrfm_fft.py
++++ uhd-3.13.1.0/fpga-src/usrp1/toplevel/mrfm/mrfm_fft.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # This is mrfm_fft_sos.py
+ # Modification of Matt's mrfm_fft.py that reads filter coefs from file
+--- uhd-3.13.1.0.orig/fpga-src/usrp2/sdr_lib/gen_cordic_consts.py
++++ uhd-3.13.1.0/fpga-src/usrp2/sdr_lib/gen_cordic_consts.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import math
+ 
+--- uhd-3.13.1.0.orig/fpga-src/usrp2/top/extract_usage.py
++++ uhd-3.13.1.0/fpga-src/usrp2/top/extract_usage.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2012 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp2/top/python/check_inout.py
++++ uhd-3.13.1.0/fpga-src/usrp2/top/python/check_inout.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp2/top/python/check_timing.py
++++ uhd-3.13.1.0/fpga-src/usrp2/top/python/check_timing.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2011 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/build.py
++++ uhd-3.13.1.0/fpga-src/usrp3/build.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/lib/crossbar/synth/synth_axis_ctrl_crossbar_2d_mesh.py
++++ uhd-3.13.1.0/fpga-src/usrp3/lib/crossbar/synth/synth_axis_ctrl_crossbar_2d_mesh.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python3
++#!/usr/bin/python3
+ #!/usr/bin/python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/lib/crossbar/synth/synth_chdr_crossbar_nxn.py
++++ uhd-3.13.1.0/fpga-src/usrp3/lib/crossbar/synth/synth_chdr_crossbar_nxn.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python3
++#!/usr/bin/python3
+ #!/usr/bin/python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/lib/crossbar/synth/synth_run.py
++++ uhd-3.13.1.0/fpga-src/usrp3/lib/crossbar/synth/synth_run.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python3
++#!/usr/bin/python3
+ #!/usr/bin/python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/lib/io_port2/create-lvbitx.py
++++ uhd-3.13.1.0/fpga-src/usrp3/lib/io_port2/create-lvbitx.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ """
+ Generate lvbitx from template and bitfile
+ """
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/launch_vivado.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/launch_vivado.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Notice: Some parts of this file were copied from PyBOMBS, which has a
+ # different copyright, and is highlighted appropriately. The following
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/uhd_image_builder.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/uhd_image_builder.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """
+ Copyright 2016-2017 Ettus Research
+ 
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/uhd_image_builder_gui.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/uhd_image_builder_gui.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """
+ Copyright 2016-2017 Ettus Research
+ 
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/viv_gen_ip_makefile.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/viv_gen_ip_makefile.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python3
+ 
+ import sys, os
+ import collections
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/viv_gen_part_id.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/viv_gen_part_id.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import argparse
+ import os, sys
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/viv_ip_xci_editor.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/viv_ip_xci_editor.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import argparse
+ import os, sys
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/scripts/xil_bitfile_parser.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/scripts/xil_bitfile_parser.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import argparse
+ import os, sys
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/utils/gen_xdc_from_rinf.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/utils/gen_xdc_from_rinf.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python
++#!/usr/bin/python3
+ 
+ import sys, os
+ import collections
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/utils/rfnoc-system-sim/colosseum_models.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/utils/rfnoc-system-sim/colosseum_models.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/utils/rfnoc-system-sim/ni_hw_models.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/utils/rfnoc-system-sim/ni_hw_models.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/utils/rfnoc-system-sim/rfnocsim.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/utils/rfnoc-system-sim/rfnocsim.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/tools/utils/rfnoc-system-sim/sim_colosseum.py
++++ uhd-3.13.1.0/fpga-src/usrp3/tools/utils/rfnoc-system-sim/sim_colosseum.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2016 Ettus Research
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/top/python/check_inout.py
++++ uhd-3.13.1.0/fpga-src/usrp3/top/python/check_inout.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/fpga-src/usrp3/top/python/check_timing.py
++++ uhd-3.13.1.0/fpga-src/usrp3/top/python/check_timing.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2011-2012 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/host/examples/python/benchmark_rate.py
++++ uhd-3.13.1.0/host/examples/python/benchmark_rate.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/examples/python/curses_fft.py
++++ uhd-3.13.1.0/host/examples/python/curses_fft.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017-2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/examples/python/rx_to_file.py
++++ uhd-3.13.1.0/host/examples/python/rx_to_file.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017-2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/examples/python/tx_waveforms.py
++++ uhd-3.13.1.0/host/examples/python/tx_waveforms.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017-2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/lib/convert/gen_convert_general.py
++++ uhd-3.13.1.0/host/lib/convert/gen_convert_general.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2011-2012 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/deps/import_rpclib.py
++++ uhd-3.13.1.0/host/lib/deps/import_rpclib.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad5623_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad5623_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad7922_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad7922_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad9510_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad9510_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2012 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad9522_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad9522_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2011,2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad9777_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad9777_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ad9862_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ad9862_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_adf4350_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_adf4350_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_adf4351_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_adf4351_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_adf4360_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_adf4360_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_adf5355_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_adf5355_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_adf5356_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_adf5356_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, A National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ads62p44_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ads62p44_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_ads62p48_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_ads62p48_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2013 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_lmx2592_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_lmx2592_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, A National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_max2112_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_max2112_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_max2118_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_max2118_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_max2829_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_max2829_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_max2870_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_max2870_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2013 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_max2871_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_max2871_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2014 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_mgcpld_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_mgcpld_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_tda18272hnm_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_tda18272hnm_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/ic_reg_maps/gen_tuner_4937di5_regs.py
++++ uhd-3.13.1.0/host/lib/ic_reg_maps/gen_tuner_4937di5_regs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/rfnoc/nocscript/gen_basic_funcs.py
++++ uhd-3.13.1.0/host/lib/rfnoc/nocscript/gen_basic_funcs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """
+ Generate the function list for the basic NocScript functions
+ """
+--- uhd-3.13.1.0.orig/host/lib/transport/gen_vrt_if_packet.py
++++ uhd-3.13.1.0/host/lib/transport/gen_vrt_if_packet.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2013,2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/transport/nirio/lvbitx/process-lvbitx.py
++++ uhd-3.13.1.0/host/lib/transport/nirio/lvbitx/process-lvbitx.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ #
+ # Copyright 2013-2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/lib/usrp/dboard/twinrx/table_to_cpp.py
++++ uhd-3.13.1.0/host/lib/usrp/dboard/twinrx/table_to_cpp.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ import sys
+ 
+--- uhd-3.13.1.0.orig/host/python/setup.py.in
++++ uhd-3.13.1.0/host/python/setup.py.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ #  Copyright 2017-2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/tests/devtest/benchmark_rate_test.py
++++ uhd-3.13.1.0/host/tests/devtest/benchmark_rate_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015-2016 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/multi_usrp_test.py
++++ uhd-3.13.1.0/host/tests/devtest/multi_usrp_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/tests/devtest/python_api_test.py
++++ uhd-3.13.1.0/host/tests/devtest/python_api_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/host/tests/devtest/run_testsuite.py
++++ uhd-3.13.1.0/host/tests/devtest/run_testsuite.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015-2016 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/rx_samples_to_file_test.py
++++ uhd-3.13.1.0/host/tests/devtest/rx_samples_to_file_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/test_messages_test.py
++++ uhd-3.13.1.0/host/tests/devtest/test_messages_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/test_pps_test.py
++++ uhd-3.13.1.0/host/tests/devtest/test_pps_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/tx_bursts_test.py
++++ uhd-3.13.1.0/host/tests/devtest/tx_bursts_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/uhd_test_base.py
++++ uhd-3.13.1.0/host/tests/devtest/uhd_test_base.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015-2016 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/usrp_probe.py
++++ uhd-3.13.1.0/host/tests/devtest/usrp_probe.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015-2016 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/tests/devtest/usrp_probe_test.py
++++ uhd-3.13.1.0/host/tests/devtest/usrp_probe_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/b2xx_side_channel.py
++++ uhd-3.13.1.0/host/utils/b2xx_side_channel.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright 2013-2015 Ettus Research LLC
+--- uhd-3.13.1.0.orig/host/utils/converter_benchmark.py
++++ uhd-3.13.1.0/host/utils/converter_benchmark.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2015 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/latency/graph.py
++++ uhd-3.13.1.0/host/utils/latency/graph.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2012 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/latency/pci_hwdata.py
++++ uhd-3.13.1.0/host/utils/latency/pci_hwdata.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2013 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/latency/run_tests.py
++++ uhd-3.13.1.0/host/utils/latency/run_tests.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2012 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/usrp2_card_burner.py
++++ uhd-3.13.1.0/host/utils/usrp2_card_burner.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2011 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/usrp2_card_burner_gui.py
++++ uhd-3.13.1.0/host/utils/usrp2_card_burner_gui.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2011 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/host/utils/usrp2_recovery.py
++++ uhd-3.13.1.0/host/utils/usrp2_recovery.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2010-2011 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/images/create_imgs_package.py
++++ uhd-3.13.1.0/images/create_imgs_package.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2014 Ettus Research LLC
+ #
+--- uhd-3.13.1.0.orig/images/populate_images.py
++++ uhd-3.13.1.0/images/populate_images.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2014 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/images/uhdimgs.py
++++ uhd-3.13.1.0/images/uhdimgs.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2014 Ettus Research LLC
+ # Copyright 2018 Ettus Research, a National Instruments Company
+--- uhd-3.13.1.0.orig/mpm/python/setup.py.in
++++ uhd-3.13.1.0/mpm/python/setup.py.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/mpm/python/socket_test.py
++++ uhd-3.13.1.0/mpm/python/socket_test.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2017 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/tools/debs/convert_changelog.py
++++ uhd-3.13.1.0/tools/debs/convert_changelog.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright 2015 National Instruments Corp.
+--- uhd-3.13.1.0.orig/tools/dissectors/make-dissector-reg.py
++++ uhd-3.13.1.0/tools/dissectors/make-dissector-reg.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Looks for registration routines in the protocol dissectors,
+ # and assembles C code to call all the routines.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/apps/uhd_phase_alignment.py
++++ uhd-3.13.1.0/tools/gr-usrptest/apps/uhd_phase_alignment.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/apps/usrp_fpga_funcverif.py
++++ uhd-3.13.1.0/tools/gr-usrptest/apps/usrp_fpga_funcverif.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # Copyright 2018 Ettus Research, a National Instruments Company
+ #
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/apps/usrp_phasealignment.py
++++ uhd-3.13.1.0/tools/gr-usrptest/apps/usrp_phasealignment.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from gnuradio.uhd.uhd_app import UHDApp
+ from usrptest.flowgraphs import phasealignment_fg
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/apps/usrp_selftest.py
++++ uhd-3.13.1.0/tools/gr-usrptest/apps/usrp_selftest.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import argparse
+ from usrptest import parsers
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/docs/doxygen/doxyxml/generated/compound.py
++++ uhd-3.13.1.0/tools/gr-usrptest/docs/doxygen/doxyxml/generated/compound.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ Generated Mon Feb  9 19:08:05 2009 by generateDS.py.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/docs/doxygen/doxyxml/generated/compoundsuper.py
++++ uhd-3.13.1.0/tools/gr-usrptest/docs/doxygen/doxyxml/generated/compoundsuper.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ #
+ # Generated Thu Jun 11 18:44:25 2009 by generateDS.py.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/docs/doxygen/doxyxml/generated/index.py
++++ uhd-3.13.1.0/tools/gr-usrptest/docs/doxygen/doxyxml/generated/index.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ Generated Mon Feb  9 19:08:05 2009 by generateDS.py.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/docs/doxygen/doxyxml/generated/indexsuper.py
++++ uhd-3.13.1.0/tools/gr-usrptest/docs/doxygen/doxyxml/generated/indexsuper.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ #
+ # Generated Thu Jun 11 18:43:54 2009 by generateDS.py.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/examples/lv_control_example.py
++++ uhd-3.13.1.0/tools/gr-usrptest/examples/lv_control_example.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from usrptest.labview_control import lv_control
+ import time
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/flowgraphs/phasealignment_fg.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/flowgraphs/phasealignment_fg.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ 
+ from gnuradio import gr
+ from gnuradio import uhd
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/flowgraphs/selftest_fg.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/flowgraphs/selftest_fg.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from gnuradio import blocks
+ from gnuradio import gr
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/functions.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/functions.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ import numpy as np
+ import time
+ import copy
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/labview_control/lv_control.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/labview_control/lv_control.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from labview_automation.client import LabVIEWClient
+ 
+ class vst_siggen:
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/phase_calc_ccf.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/phase_calc_ccf.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright 2016 Ettus Research LLC.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/qa_measurement_sink_f.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/qa_measurement_sink_f.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # 
+ # Copyright 2016 Ettus Research LLC.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/rts_tests/test_phasealignment.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/rts_tests/test_phasealignment.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright 2016 Ettus Research LLC.
+--- uhd-3.13.1.0.orig/tools/gr-usrptest/python/setup.py
++++ uhd-3.13.1.0/tools/gr-usrptest/python/setup.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ try:
+     from setuptools import setup
+ except ImportError:
+--- uhd-3.13.1.0.orig/tools/mega_fft/mega_fft.py
++++ uhd-3.13.1.0/tools/mega_fft/mega_fft.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ ##################################################
+ # GNU Radio Python Flow Graph
+ # Copyright 2014 National Instruments
+--- uhd-3.13.1.0.orig/tools/mega_fft/mega_fft_2ch.py
++++ uhd-3.13.1.0/tools/mega_fft/mega_fft_2ch.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ ##################################################
+ # GNU Radio Python Flow Graph
+ # Copyright 2014 National Instruments
+--- uhd-3.13.1.0.orig/tools/uhd_txrx_debug_prints/uhd_txrx_debug_prints_graph.py
++++ uhd-3.13.1.0/tools/uhd_txrx_debug_prints/uhd_txrx_debug_prints_graph.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright 2013-2014 Ettus Research LLC
