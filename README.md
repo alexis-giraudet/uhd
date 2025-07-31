@@ -9,5 +9,5 @@ sudo apt install --no-upgrade $(realpath *.deb)
 ```
 2. Hold UHD packages to prevent upgrades:
 ```sh
-sudo apt-mark hold libuhd-dev python3-uhd uhd-host
+sudo apt-mark hold libuhd-dev libuhd3.13.1 python3-uhd uhd-host
 ```
